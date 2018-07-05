@@ -1,0 +1,74 @@
+.wrapper {
+	width: 80%;
+	margin: 60px auto;
+}
+
+.alphabet,
+.phrase,
+.guesses {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.phrase {
+	width: 80%;
+	padding-bottom: 50px;
+}
+
+.alphabet {
+	width: 70%;
+	padding-top: 50px; 
+}
+
+.guesses {
+	padding-top: 100px;
+	width: 50%;
+}
+
+.word {
+	display: inline-block;
+}
+
+.space,
+.letter {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	border-radius: 5%;
+	color: #fff;
+	text-align: center;
+	margin: 10px;
+}
+
+.space {
+	background: none;
+}
+
+.guess {
+	background-color: #6EC94A;
+	margin: 0 10px;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	display: inline-block;
+}
+
+.alphabet .letter {
+	background-color: #4C86A8;
+}
+
+.phrase .letter {
+	background-color: #AFAFAF;
+}
+
+.letter.wrong {
+	background-color: #696A6D;
+}
+
+.letter.right {
+	background-color: #5FD5DD;
+}
+
+.guess.spent {
+	background-color: #AFAFAF
+}

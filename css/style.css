@@ -40,6 +40,12 @@
 	margin: 10px;
 }
 
+.letter p {
+	margin: 0;	
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
 .space {
 	background: none;
 }

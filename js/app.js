@@ -1,3 +1,6 @@
+/* Phrases 
+*********************/
+let currentPhrase;
 const phrases = [
 	"Not A Problem",
 	"A Bargain At Half The Price",
@@ -31,17 +34,26 @@ const phrases = [
 	"Monkey See Monkey Do",
 ];
 
+
+/* Helper Functions 
+*********************/
+
 // select random phrase
 function randomPhrase() {
 	const rand = Math.floor(Math.random() * phrases.length);
 	return phrases[rand];
 }
 
+// element factory 
 function createElement(type, prop, value) {
 	const element = document.createElement(type);
 	element[prop] = value;
 	return element;
 }
+
+
+/* Display Functions
+***********************/
 
 function displayPhraseAsBlanks(phrase) {
 	console.log(phrase);
@@ -76,17 +88,36 @@ function displayPhraseAsBlanks(phrase) {
 	phraseDiv.append(wordDiv);
 }
 
-// display phrase as blank spaces
-displayPhraseAsBlanks(randomPhrase());
 
-// when letter in alphabet is clicked
-	// phrase contains letter
-		// display all occurances of letter in phrase
-		// color letter in alphabet 
-	// else 
-		// take away a guess
-		// color guess display 
-		// color letter in alphabet 
+/* Event Listeners 
+***********************/
+
+document.querySelector('.alphabet').addEventListener('click', e => {
+	// respond if user clicks letter not already clicked and marked right or wrong 
+	if (e.target.tagName === 'P' && !(e.target.parentElement.classList.contains('wrong') || e.target.parentElement.classList.contains('right')) ) {
+		const letter = e.target.textContent.toLowerCase().trim();
+		
+		// check if phrase contains letter
+		if (currentPhrase.toLowerCase().indexOf(letter) > -1) {
+			// expose letter in word display 
+
+			// mark letter div right
+			e.target.parentElement.classList.add('right');
+		} else {
+			// else mark letter div wrong 
+			e.target.parentElement.classList.add('wrong');
+
+			// reduce number of guesses by 1
+
+		}
+		
+
+	}
+});
+
+// display phrase as blank spaces
+currentPhrase = randomPhrase();
+displayPhraseAsBlanks(currentPhrase);
 
 // if all guesses are used up, game over (player looses)
 // if all letters in phrase have been guessed, player wins

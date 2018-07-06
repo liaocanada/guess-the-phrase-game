@@ -6,30 +6,31 @@
 .alphabet,
 .phrase,
 .guesses {
-	margin: 0 auto;
+	margin: 100px auto;
 	text-align: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .phrase {
 	width: 80%;
-	padding-bottom: 50px;
 }
 
 .alphabet {
 	width: 70%;
-	padding-top: 50px; 
 }
 
 .guesses {
-	padding-top: 100px;
 	width: 50%;
 }
 
 .word {
-	display: inline-block;
+	display: flex;
+	flex-direction: row;
 }
 
-.space,
 .letter {
 	display: inline-block;
 	width: 50px;
@@ -44,10 +45,6 @@
 	margin: 0;	
     padding-top: 1em;
     padding-bottom: 1em;
-}
-
-.space {
-	background: none;
 }
 
 .guess {
@@ -75,6 +72,11 @@
 	background-color: #5FD5DD;
 }
 
+.letter.space {
+	background: none;
+}
+
 .guess.spent {
 	background-color: #AFAFAF
 }
+

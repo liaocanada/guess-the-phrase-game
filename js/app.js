@@ -52,6 +52,18 @@ function createElement(type, prop, value) {
 	return element;
 }
 
+// reduce available guesses by 1
+function reduceAvailableGuesses() {
+	availableGuesses -= 1;
+
+	reduceGuessDisplay();
+
+	if (availableGuesses === 0) {
+		// all out of guesses, game over 
+		console.log('game over');
+	}
+}
+
 
 /* Display Functions
 ***********************/
@@ -73,6 +85,7 @@ function displayPhraseAsBlanks(phrase) {
 
 			// append space to phrase div 
 			spaceDiv = createElement('div', 'className', 'space');
+			spaceDiv.classList.add('letter');
 			phraseDiv.append(spaceDiv);
 
 			// create new word div 
@@ -89,17 +102,6 @@ function displayPhraseAsBlanks(phrase) {
 	phraseDiv.append(wordDiv);
 }
 
-function reduceAvailableGuesses() {
-	availableGuesses -= 1;
-
-	reduceGuessDisplay();
-
-	if (availableGuesses === 0) {
-		// all out of guesses, game over 
-		console.log('game over');
-	}
-}
-
 // reduces guess indicator display according to available guesses left
 function reduceGuessDisplay() {
 	const guesses = document.querySelector('.guesses');
@@ -107,6 +109,23 @@ function reduceGuessDisplay() {
 	// add spent class to next guess indicator
 	guesses.children[4 - availableGuesses].classList.add('spent');
 }
+
+function displayExposedLetter(letter) {
+	// select phrase display
+	const phraseDiv = document.querySelector('.phrase');
+
+	// loop over all letters in current phrase
+	for (let c = 0; c < currentPhrase.length; c++) {
+		if (currentPhrase[c].toLowerCase() === letter) {
+			// create p tag to hold letter
+			const letterPara = createElement('p', 'textContent', letter.toUpperCase());
+			// insert into appropriate phraseDiv letter
+			phraseDiv.querySelectorAll('.letter')[c].append(letterPara);
+
+		}
+	}
+
+} 
 
 /* Event Listeners 
 ***********************/
@@ -119,6 +138,7 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 		// check if phrase contains letter
 		if (currentPhrase.toLowerCase().indexOf(letter) > -1) {
 			// expose letter in word display 
+			displayExposedLetter(letter);
 
 			// mark letter div right
 			e.target.parentElement.classList.add('right');

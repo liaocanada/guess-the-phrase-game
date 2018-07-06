@@ -1,6 +1,7 @@
 /* Phrases 
 *********************/
 let currentPhrase;
+let availableGuesses; 
 const phrases = [
 	"Not A Problem",
 	"A Bargain At Half The Price",
@@ -88,6 +89,24 @@ function displayPhraseAsBlanks(phrase) {
 	phraseDiv.append(wordDiv);
 }
 
+function reduceAvailableGuesses() {
+	availableGuesses -= 1;
+
+	reduceGuessDisplay();
+
+	if (availableGuesses === 0) {
+		// all out of guesses, game over 
+		console.log('game over');
+	}
+}
+
+// reduces guess indicator display according to available guesses left
+function reduceGuessDisplay() {
+	const guesses = document.querySelector('.guesses');
+
+	// add spent class to next guess indicator
+	guesses.children[4 - availableGuesses].classList.add('spent');
+}
 
 /* Event Listeners 
 ***********************/
@@ -107,8 +126,8 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 			// else mark letter div wrong 
 			e.target.parentElement.classList.add('wrong');
 
-			// reduce number of guesses by 1
-
+			// reduce available guesses 
+			reduceAvailableGuesses();
 		}
 		
 
@@ -117,6 +136,7 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 
 // display phrase as blank spaces
 currentPhrase = randomPhrase();
+availableGuesses = 5;
 displayPhraseAsBlanks(currentPhrase);
 
 // if all guesses are used up, game over (player looses)

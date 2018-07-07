@@ -1,6 +1,78 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	font-family: 'Lora', serif;
+}
+
+p {
+	font-family: 'Anonymous Pro', monospace;
+}
+
 .wrapper {
 	width: 80%;
 	margin: 60px auto;
+}
+
+.overlay {
+	background-color: rgba(0, 0, 0, .5);
+	height: 100%;
+	width: 100%;
+	position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+
+.inner-overlay {
+	position: absolute;
+	top: 50%;
+    left: 25%;
+    transform: translateY(-50%);
+	width: 50%;
+    height: 400px;
+    margin: 0 auto;
+    background: #FFF;
+    text-align: center;
+    border: solid 10px #5FD5DD;
+    border-radius: 95px 0px 95px 0px / 69px 33px 69px 0px;
+    -webkit-box-shadow: 0px 0px 36px -5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 36px -5px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 36px -5px rgba(0,0,0,0.75);
+}
+
+.inner-overlay h1 {
+	border-bottom: solid 1px #5FD5DD;
+	width: 75%;
+	margin: 25px auto 50px;
+}
+
+.inner-overlay p {
+	margin-bottom: 50px; 
+	padding: 0 10px;
+	line-height: 1.5em;
+}
+
+.inner-overlay button {
+	font-family: 'Anonymous Pro', monospace;
+	font-size: 1em;
+	border: solid 4px #5FD5DD;
+	border-radius: 5%;
+	padding: 5px 18px;
+	margin: 0 10px;
+	transition: .4s;
+}
+
+.inner-overlay button:focus {
+	outline-style: none;
+}
+
+.inner-overlay button:hover {
+	border-color: #53BAC1;
+	color: #fff;
+	background-color: #5FD5DD;
 }
 
 .alphabet,
@@ -24,6 +96,8 @@
 
 .guesses {
 	width: 50%;
+	margin-bottom: 0;
+	padding-bottom: 0;
 }
 
 .word {
@@ -79,4 +153,31 @@
 .guess.spent {
 	background-color: #AFAFAF
 }
+
+@media screen and (min-width: 450px) {
+
+	.inner-overlay button { 
+		font-size: 1.5em;
+	}
+}
+
+@media screen and (min-width: 530px) {
+
+	.inner-overlay {
+		height: 380px;
+	}
+
+	.inner-overlay button { 
+		font-size: 2em;
+	}
+}
+
+@media screen and (min-width: 740px) {
+	.inner-overlay {
+		height: 300px;
+	}
+}
+
+
+
 

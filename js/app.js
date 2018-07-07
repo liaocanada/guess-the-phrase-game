@@ -40,6 +40,16 @@ const phrases = [
 /* Helper Functions 
 *********************/
 
+function newGame() {
+	// pick random phrase
+	currentPhrase = randomPhrase();
+	// reset counters
+	availableGuesses = 5;
+	numLettersGuessed = 0;
+	// display phrase as blank spaces
+	displayPhraseAsBlanks(currentPhrase);
+}
+
 // select random phrase
 function randomPhrase() {
 	const rand = Math.floor(Math.random() * phrases.length);
@@ -138,6 +148,14 @@ function displayExposedLetter(letter) {
 
 } 
 
+function displayOverlay() {
+	document.querySelector('.overlay').style.display = ""
+}
+
+function hideOverlay() {
+	document.querySelector('.overlay').style.display = "none"
+}
+
 /* Event Listeners 
 ***********************/
 
@@ -174,11 +192,14 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 	}
 });
 
-// display phrase as blank spaces
-currentPhrase = randomPhrase();
-availableGuesses = 5;
-numLettersGuessed = 0;
-displayPhraseAsBlanks(currentPhrase);
+document.querySelector('.inner-overlay button').addEventListener('click', e => {
+	// starting new game 
+	newGame();
+	// hide overlay 
+	hideOverlay();
+});
+
+
 
 
 

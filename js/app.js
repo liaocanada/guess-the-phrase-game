@@ -29,7 +29,7 @@ const phrases = [
 	"Business Casual",
 	"Having A Blast",
 	"Hot And Spicy",
-	"It is In A Class By It Self",
+	"What A Good Boy",
 	"Lay It On The Line",
 	"Let The Sunshine In",
 	"Mad As A Hatter",
@@ -167,7 +167,7 @@ function hideOverlay() {
 // remove classes 'right' and 'wrong' from all alphabet letters 
 function clearAlphabetRightWrong() {
 	const letters = document.querySelectorAll('.alphabet .letter');
-	
+
 	for (let i = 0; i < letters.length; i++) {
 		if (letters[i].classList.contains('right')) {
 			letters[i].classList.remove('right');
@@ -194,7 +194,7 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 			e.target.parentElement.classList.add('right');
 
 			// check if all letters have been guessed 
-			if (numLettersGuessed === currentPhrase.length) {
+			if (numLettersGuessed === currentPhrase.replace(/ /g,'').length) {
 				gameOver(true);
 			}
 

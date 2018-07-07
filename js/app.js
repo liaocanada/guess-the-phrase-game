@@ -2,6 +2,7 @@
 *********************/
 let currentPhrase;
 let availableGuesses; 
+let lettersGuessed; 
 const phrases = [
 	"Not A Problem",
 	"A Bargain At Half The Price",
@@ -57,19 +58,25 @@ function reduceAvailableGuesses() {
 	availableGuesses -= 1;
 
 	reduceGuessDisplay();
+}
 
-	if (availableGuesses === 0) {
-		// all out of guesses, game over 
-		console.log('game over');
+// handle end game 
+function gameOver(playerWin) {
+	// display overlay with popup 
+	if (playerWin) {
+		console.log('game over, you win');
+	} else {
+		console.log('game over, you loose');
 	}
 }
+
+// if all letters in phrase have been guessed, player wins
 
 
 /* Display Functions
 ***********************/
 
 function displayPhraseAsBlanks(phrase) {
-	console.log(phrase);
 	// select phrase div 
 	const phraseDiv = document.querySelector('.phrase');
 	// start with empty word div 
@@ -117,8 +124,12 @@ function displayExposedLetter(letter) {
 	// loop over all letters in current phrase
 	for (let c = 0; c < currentPhrase.length; c++) {
 		if (currentPhrase[c].toLowerCase() === letter) {
+			// track num letters guessed 
+			numLettersGuessed++;
+
 			// create p tag to hold letter
 			const letterPara = createElement('p', 'textContent', letter.toUpperCase());
+
 			// insert into appropriate phraseDiv letter
 			phraseDiv.querySelectorAll('.letter')[c].append(letterPara);
 
@@ -142,22 +153,45 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 
 			// mark letter div right
 			e.target.parentElement.classList.add('right');
+
+			// check if all letters have been guessed 
+			if (numLettersGuessed === currentPhrase.length) {
+				gameOver(true);
+			}
+
 		} else {
 			// else mark letter div wrong 
 			e.target.parentElement.classList.add('wrong');
 
 			// reduce available guesses 
 			reduceAvailableGuesses();
-		}
-		
 
+			// all out of guesses, game over 
+			if (availableGuesses === 0) {
+				gameOver(false);
+			}
+		}
 	}
 });
 
 // display phrase as blank spaces
 currentPhrase = randomPhrase();
 availableGuesses = 5;
+numLettersGuessed = 0;
 displayPhraseAsBlanks(currentPhrase);
 
-// if all guesses are used up, game over (player looses)
-// if all letters in phrase have been guessed, player wins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

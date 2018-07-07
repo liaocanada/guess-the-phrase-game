@@ -48,6 +48,8 @@ function newGame() {
 	numLettersGuessed = 0;
 	// display phrase as blank spaces
 	displayPhraseAsBlanks(currentPhrase);
+	// clear alphabet of right,wrong indicators
+	clearAlphabetRightWrong();
 }
 
 // select random phrase
@@ -74,9 +76,9 @@ function reduceAvailableGuesses() {
 function gameOver(playerWin) {
 	// display overlay with popup 
 	if (playerWin) {
-		console.log('game over, you win');
+		displayOverlayWithMessage("You got it! Want to play again?")
 	} else {
-		console.log('game over, you loose');
+		displayOverlayWithMessage(`Whoops! The phrase was '${currentPhrase}'. Better luck next time!`);
 	}
 }
 
@@ -89,6 +91,7 @@ function gameOver(playerWin) {
 function displayPhraseAsBlanks(phrase) {
 	// select phrase div 
 	const phraseDiv = document.querySelector('.phrase');
+	phraseDiv.innerHTML = '';
 	// start with empty word div 
 	let wordDiv = createElement('div', 'className', 'word');
 	let letterDiv;
@@ -152,8 +155,26 @@ function displayOverlay() {
 	document.querySelector('.overlay').style.display = ""
 }
 
+function displayOverlayWithMessage(msg) {
+	document.querySelector('.inner-overlay p').textContent = msg;
+	displayOverlay();
+}
+
 function hideOverlay() {
 	document.querySelector('.overlay').style.display = "none"
+}
+
+// remove classes 'right' and 'wrong' from all alphabet letters 
+function clearAlphabetRightWrong() {
+	const letters = document.querySelectorAll('.alphabet .letter');
+	
+	for (let i = 0; i < letters.length; i++) {
+		if (letters[i].classList.contains('right')) {
+			letters[i].classList.remove('right');
+		} else if (letters[i].classList.contains('wrong')) {
+			letters[i].classList.remove('wrong');
+		}
+	}
 }
 
 /* Event Listeners 

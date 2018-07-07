@@ -48,8 +48,10 @@ function newGame() {
 	numLettersGuessed = 0;
 	// display phrase as blank spaces
 	displayPhraseAsBlanks(currentPhrase);
-	// clear alphabet of right,wrong indicators
-	clearAlphabetRightWrong();
+	// reset guesses
+	resetGuessDisplay();
+	// reset alphabet
+	resetAlphabetDisplay();
 }
 
 // select random phrase
@@ -165,7 +167,7 @@ function hideOverlay() {
 }
 
 // remove classes 'right' and 'wrong' from all alphabet letters 
-function clearAlphabetRightWrong() {
+function resetAlphabetDisplay() {
 	const letters = document.querySelectorAll('.alphabet .letter');
 
 	for (let i = 0; i < letters.length; i++) {
@@ -174,6 +176,13 @@ function clearAlphabetRightWrong() {
 		} else if (letters[i].classList.contains('wrong')) {
 			letters[i].classList.remove('wrong');
 		}
+	}
+}
+
+function resetGuessDisplay() {
+	const spentGuesses = document.querySelectorAll('.guesses .spent');
+	for (let i = 0; i < spentGuesses.length; i++) {
+		spentGuesses[i].classList.remove('spent');
 	}
 }
 

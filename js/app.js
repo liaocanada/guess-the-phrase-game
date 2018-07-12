@@ -181,6 +181,7 @@ function resetAlphabetDisplay() {
 
 function resetGuessDisplay() {
 	const spentGuesses = document.querySelectorAll('.guesses .spent');
+	
 	for (let i = 0; i < spentGuesses.length; i++) {
 		spentGuesses[i].classList.remove('spent');
 	}

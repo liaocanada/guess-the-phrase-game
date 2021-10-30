@@ -4,46 +4,12 @@ let currentPhrase;
 let availableGuesses;
 let lettersGuessed;
 
-const phrases = [
-	"Not A Problem",
-	"A Bargain At Half The Price",
-	"A Chip Off The Old Block",
-	"Attracting Attention",
-	"Double Talk",
-	"A Day Late And A Dollar Short",
-	"Birthplace Of Democracy",
-	"Controlled Chaos",
-	"Act Like An Adult",
-	"Can I Have A Hug",
-	"And They Lived Happily Ever After",
-	"All That Jazz",
-	"Age Is Just A Number",
-	"All Good Things Come To Those Who Wait",
-	"Bid Adieu",
-	"Eat Drink And Be Merry",
-	"Access Denied",
-	"Dog Days Of Summer",
-	"Expand Your Horizons",
-	"Follow The Crowd",
-	"Fog As Thick As Pea Soup",
-	"Behind The Times",
-	"Business Casual",
-	"Having A Blast",
-	"Hot And Spicy",
-	"What A Good Boy",
-	"Lay It On The Line",
-	"Let The Sunshine In",
-	"Mad As A Hatter",
-	"Monkey See Monkey Do",
-];
-
-
 /* Helper Functions 
 *********************/
 
-function newGame() {
+async function newGame() {
 	// pick random phrase
-	currentPhrase = randomPhrase();
+	currentPhrase = await randomPhrase();
 	// reset counters
 	availableGuesses = 5;
 	numLettersGuessed = 0;
@@ -54,9 +20,9 @@ function newGame() {
 }
 
 // select random phrase
-function randomPhrase() {
-	const rand = Math.floor(Math.random() * phrases.length);
-	return phrases[rand];
+async function randomPhrase() {
+	const response = await fetch("localhost:8080/phrase");
+	return await response.text();
 }
 
 // element factory 
@@ -214,9 +180,9 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 	}
 });
 
-document.querySelector('.inner-overlay button').addEventListener('click', e => {
+document.querySelector('.inner-overlay button').addEventListener('click', async e => {
 	// starting new game 
-	newGame();
+	await newGame();
 	// hide overlay 
 	hideOverlay();
 });

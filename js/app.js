@@ -1,8 +1,9 @@
 /* Phrases 
 *********************/
 let currentPhrase;
-let availableGuesses; 
-let lettersGuessed; 
+let availableGuesses;
+let lettersGuessed;
+
 const phrases = [
 	"Not A Problem",
 	"A Bargain At Half The Price",
@@ -149,7 +150,7 @@ function displayExposedLetter(letter) {
 		}
 	}
 
-} 
+}
 
 function displayOverlay() {
 	document.querySelector('.overlay').style.display = ""
@@ -182,9 +183,9 @@ function clearAlphabetRightWrong() {
 
 document.querySelector('.alphabet').addEventListener('click', e => {
 	// respond if user clicks letter not already clicked and marked right or wrong 
-	if (e.target.tagName === 'P' && !(e.target.parentElement.classList.contains('wrong') || e.target.parentElement.classList.contains('right')) ) {
+	if (e.target.tagName === 'P' && !(e.target.parentElement.classList.contains('wrong') || e.target.parentElement.classList.contains('right'))) {
 		const letter = e.target.textContent.toLowerCase().trim();
-		
+
 		// check if phrase contains letter
 		if (currentPhrase.toLowerCase().indexOf(letter) > -1) {
 			// expose letter in word display 
@@ -194,7 +195,7 @@ document.querySelector('.alphabet').addEventListener('click', e => {
 			e.target.parentElement.classList.add('right');
 
 			// check if all letters have been guessed 
-			if (numLettersGuessed === currentPhrase.replace(/ /g,'').length) {
+			if (numLettersGuessed === currentPhrase.replace(/ /g, '').length) {
 				gameOver(true);
 			}
 
@@ -219,21 +220,3 @@ document.querySelector('.inner-overlay button').addEventListener('click', e => {
 	// hide overlay 
 	hideOverlay();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,6 +6,8 @@ import (
 	"os"
 	"io/ioutil"
     "net/http"
+	s "strings"
+	"regexp"
 )
 
 func phrase(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +25,18 @@ func phrase(w http.ResponseWriter, r *http.Request) {
 		return;
 	}
 
-    fmt.Fprint(w, string(bodyBytes));
+	phrase := processPhrase(string(bodyBytes))
+
+    fmt.Fprint(w, phrase);
+}
+
+func processPhrase(phrase string) string {
+	phrase = (s.Split(phrase, ": ")[1]);
+	phrase = (s.Split(phrase, ".")[0]);
+
+	nonLetterSpace := regexp.MustCompile(`[^a-zA-Z ]`);
+	phrase = nonLetterSpace.ReplaceAllString(phrase, "");
+	return phrase;
 }
 
 func main() {

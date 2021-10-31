@@ -21,7 +21,7 @@ async function newGame() {
 
 // select random phrase
 async function randomPhrase() {
-	const response = await fetch("http://localhost:8080/phrase");
+	const response = await fetch(window.location.origin + "/phrase");
 	return await response.text();
 }
 

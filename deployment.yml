@@ -5,7 +5,7 @@ metadata:
     app: comp4000
   name: comp4000server
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: comp4000
@@ -41,6 +41,41 @@ spec:
     - sleep
     - infinity
   restartPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: comp4000
+    component: frontend
+  name: guess-the-phrase
+spec:
+  containers:
+  - name: guess-the-phrase
+    image: guess-the-phrase
+    imagePullPolicy: Never
+  restartPolicy: Never
+  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: comp4000
+  name: guess-the-phrase-port
+spec:
+  type: NodePort
+  selector:
+    app: comp4000
+    component: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    nodePort: 80
+    targetPort: 8080
 
 ---
 
